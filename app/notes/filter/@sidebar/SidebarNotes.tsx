@@ -1,20 +1,21 @@
-import css from "../@sidebar/SidebarNote.module.css";
 import Link from 'next/link';
+import { getCategories } from '@/lib/api';
 
-const SidebarNotes = () => {
-return (
-    <ul className={css.menuList}>
-    {/* список тегів */}
-      <li className={css.menuItem}>
-         <Link href='/notes/filter/all'className={css.menuLink}>Notes</Link>
-          All notes
+const SidebarNotes = async () => {
+  const categories = await getCategories();
+
+  return (
+    <ul>
+      <li>
+        <Link href={`/notes/filter/all`}>All notes</Link>
       </li>
-      <li className={css.menuItem}>
-        <Link href={`/notes/filter/${tag}`} className={css.menuLink}></Link>
-          Назва тегу
-      </li>
+      {categories.map((category) => (
+        <li key={category.id}>
+          <Link href={`/notes/filter/${category.id}`}>{category.name}</Link>
+        </li>
+      ))}
     </ul>
-)
-}
+  );
+};
 
-export default SidebarNotes
+export default SidebarNotes;
