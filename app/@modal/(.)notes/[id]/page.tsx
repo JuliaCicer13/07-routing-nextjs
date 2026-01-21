@@ -1,19 +1,16 @@
-import { getSingleNote } from '@/lib/api';
-import Modal from '@/components/Modal/Modal';
-type Props = {
-  params: Promise<{ id: string }>;
-};
+import { fetchNotes } from "@/lib/api";
+import { QueryClient, HydrationBoundary, dehydrate } from  "@tanstack/react-query";
+import NotesClient from "@/app/notes/filter/[...slug]/Notes.client";
 
-const NotePreview = async ({ params }: Props) => {
-  const { id } = await params;
-  const note = await getSingleNote(id);
+export default async function NotePage () {
+   const queryClient = new QueryClient();
 
-  return (
-    <Modal>
-      <h2>{note.title}</h2>
-      <p>{note.content}</p>
-    </Modal>
-  );
-};
+   await queryClient.prefetchQuery({
+    queryKey: ["notes"],
+    queryFn: () => fetchNotes("", 1, 12),
+   });
 
-export default NotePreview;
+   return <HydrationBoundary state={dehydrate(queryClient)}>
+      <NotesClient/>
+   </HydrationBoundary>
+}
