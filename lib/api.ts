@@ -25,8 +25,6 @@ const api = axios.create({
   },
 });
 
-
-
 export const fetchNotes = async (
   search: string,
   page: number,
@@ -40,6 +38,13 @@ export const fetchNotes = async (
     },
   });
   return response.data;
+};
+
+export const getNotes = async (categoryId?: string) => {
+  const res = await axios.get<FetchNotesResponse>('/notes', {
+    params: { categoryId },
+  });
+  return res.data;
 };
 
 export const fetchNoteById = async (id: string): Promise<Note> => {

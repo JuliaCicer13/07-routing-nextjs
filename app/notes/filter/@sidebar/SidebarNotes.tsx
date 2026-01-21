@@ -1,18 +1,17 @@
 import css from "../@sidebar/SidebarNote.module.css";
+import Link from 'next/link';
 
 const SidebarNotes = () => {
 return (
     <ul className={css.menuList}>
     {/* список тегів */}
       <li className={css.menuItem}>
-        <a href={`/notes/filter/all`} className={css.menuLink}>
+         <Link href='/notes/filter/all'className={css.menuLink}>Notes</Link>
           All notes
-        </a>
       </li>
       <li className={css.menuItem}>
-        <a href={`url до сторінки за відповідним тегом`} className=            {css.menuLink}>
+        <Link href={`/notes/filter/${tag}`} className={css.menuLink}></Link>
           Назва тегу
-        </a>
       </li>
     </ul>
 )
