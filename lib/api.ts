@@ -1,6 +1,6 @@
 import axios from "axios";
 import type { Note }from "../types/note";
-import type { Category } from "../types/note";
+import type { Tags } from "../types/note";
 
 const BASE_URL = "https://notehub-public.goit.study/api/notes";
 
@@ -63,7 +63,7 @@ export const deleteNote = async (noteId: string): Promise<Note> => {
   return response.data;
 }
 
-export const getCategories = async () => {
-  const res = await axios<Category[]>('/categories');
+export const getTags = async () => {
+  const res = await axios<Tags[]>('/categories');
   return res.data;
 };

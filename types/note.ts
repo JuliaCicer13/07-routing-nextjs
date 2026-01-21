@@ -9,7 +9,7 @@ export interface Note {
       tag: NoteTag,
 }
 
-export type Category = {
+export type Tags = {
   id: string;
   name: string;
   description: string;

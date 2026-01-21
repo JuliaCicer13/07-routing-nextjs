@@ -1,17 +1,17 @@
 import Link from 'next/link';
-import { getCategories } from '@/lib/api';
+import { getTags } from '@/lib/api';
 
 const SidebarNotes = async () => {
-  const categories = await getCategories();
+  const tags = await getTags();
 
   return (
     <ul>
       <li>
         <Link href={`/notes/filter/all`}>All notes</Link>
       </li>
-      {categories.map((category) => (
-        <li key={category.id}>
-          <Link href={`/notes/filter/${category.id}`}>{category.name}</Link>
+      {tags.map((tag) => (
+        <li key={tag.id}>
+          <Link href={`/notes/filter/${tag.id}`}>{tag.name}</Link>
         </li>
       ))}
     </ul>
