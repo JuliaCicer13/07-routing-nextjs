@@ -1,8 +1,8 @@
 import Link from 'next/link';
-import { getTags } from '@/lib/api';
+import { NoteTag } from '@/types/note';
 
 const SidebarNotes = async () => {
-  const tags = await getTags();
+  const tags = await NoteTag(tags);
 
   return (
     <ul>

@@ -15,7 +15,6 @@ export default function NotesClient() {
   const [search, setSearchQuery] = useState<string>("");
   const [page, setPage] = useState(1);
 
-  const perPage = 12;
   
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -30,8 +29,8 @@ export default function NotesClient() {
   );
 
   const { data, isSuccess} = useQuery({
-    queryKey: ['notes', search, page],
-    queryFn: () => fetchNotes(search, page, perPage),
+    queryKey: ['notes', search, tag , page],
+    queryFn: () => fetchNotes(search, page ,tag),
     placeholderData: keepPreviousData,
     refetchOnMount: false,
   });

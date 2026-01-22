@@ -8,11 +8,3 @@ export interface Note {
       updatedAt: string;
       tag: NoteTag,
 }
-
-export type Tags = {
-  id: string;
-  name: string;
-  description: string;
-  createdAt: string;
-  updatedAt: string;
-};
