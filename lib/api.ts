@@ -12,6 +12,7 @@ interface CreateNotePayload {
     title: string;
     content: string;
     tag: string;
+    page: number;
   
 }
 

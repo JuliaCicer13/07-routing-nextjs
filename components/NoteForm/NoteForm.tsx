@@ -8,7 +8,8 @@ import {ErrorMessage} from "formik";
 import Loader from "../Loader/loader";
 
 interface NoteFormProps {
- onSuccess: () => void;
+
+ onClose: () => void;
 }
 
 interface FormValues {
@@ -23,7 +24,7 @@ const initialValues: FormValues = {
   tag: "Todo",
 };
 
-export default function NoteForm ({onSuccess}: NoteFormProps) {
+export default function NoteForm ({onClose}: NoteFormProps) {
 const queryClient = useQueryClient();
 const fieldId = useId();
 
@@ -31,10 +32,10 @@ const {mutate, isPending} = useMutation({
   mutationFn: createNote,
   onSuccess: () => {
     queryClient.invalidateQueries({queryKey: ["notes"]});
-    onSuccess();
+    onClose();
   },
   onError: () => {
-    
+
   },
 });
 
@@ -85,7 +86,7 @@ return (
   </div>
 
   <div className={css.actions}>
-    <button type="button" className={css.cancelButton} onClick={onSuccess}> Cancel</button>
+    <button type="button" className={css.cancelButton} onClick={onClose}> Cancel</button>
     <button type="submit" className={css.submitButton} disabled={isPending}>
      {isPending ? <Loader/> : "Create note" }
     </button>

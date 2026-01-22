@@ -13,8 +13,8 @@ import Pagination from '@/components/Pagination/Pagination';
 export default function NotesClient() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [search, setSearchQuery] = useState<string>("");
-  const [page, setPage] = useState(1);
-
+  const [page, onPageChange] = useState(1);
+  const [tag, setTag] = useState<string>("");
   
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -23,7 +23,8 @@ export default function NotesClient() {
   const handleSearch = useDebouncedCallback(
     (value:string) => {
     setSearchQuery(value);
-    setPage(1);
+    onPageChange(1);
+    setTag(value);
    },
     500
   );
@@ -46,7 +47,7 @@ return (
       <Pagination
         totalPages={totalPages}
         page={page}
-        setPage={setPage}
+        setPage={onPageChange}
       />
     )}
     <button onClick={openModal} >Create note +</button>
@@ -54,7 +55,7 @@ return (
     {isSuccess && results.length > 0 && ( <NoteList notes={results}/>)}
      <Toaster position="top-right" reverseOrder={false}/>
      {isModalOpen && (<Modal onClick={closeModal}>
-      <NoteForm onSuccess={closeModal}/>
+      <NoteForm onClose={closeModal}/>
      </Modal>
      )}
 </div>
