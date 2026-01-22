@@ -1,3 +1,6 @@
-export default function Default () {
-    return null;
-}
+
+const NotesSidebar = async () => {
+  return <div>NotesSidebar</div>;
+};
+
+export default NotesSidebar;

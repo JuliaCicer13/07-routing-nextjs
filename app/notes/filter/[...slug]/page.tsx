@@ -1,4 +1,4 @@
-import { getTags } from '@/lib/api';
+
 import NoteList from '@/components/NoteList/NoteList';
 
 type Props = {
