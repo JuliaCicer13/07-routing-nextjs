@@ -1,6 +1,9 @@
+import SidebarNotes from "./SidebarNotes";
 
 const NotesSidebar = async () => {
-  return <div>NotesSidebar</div>;
+  return (<div>
+    <SidebarNotes/>
+    </div>)
 };
 
 export default NotesSidebar;

@@ -1,17 +1,17 @@
 import Link from 'next/link';
-import { NoteTag } from '@/types/note';
+import { TAGS } from '@/constants/tags';
 
 const SidebarNotes = async () => {
-  const tags = await NoteTag(tags);
-
   return (
     <ul>
       <li>
         <Link href={`/notes/filter/all`}>All notes</Link>
       </li>
-      {tags.map((tag) => (
-        <li key={tag.id}>
-          <Link href={`/notes/filter/${tag.id}`}>{tag.name}</Link>
+      {TAGS.map((tag) => (
+        <li key={tag}>
+          <Link href={`/notes/filter/${tag}`}>
+          {tag}
+          </Link>
         </li>
       ))}
     </ul>
