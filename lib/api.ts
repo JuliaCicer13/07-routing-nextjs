@@ -12,8 +12,6 @@ interface CreateNotePayload {
     title: string;
     content: string;
     tag: string;
-    page: number;
-  
 }
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
