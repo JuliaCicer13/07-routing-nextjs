@@ -11,7 +11,7 @@ interface FetchNotesResponse {
 
 interface CreateNotePayload {
     title: string;
-    content: string | null;
+    content: string;
     tag: string;
   
 }
