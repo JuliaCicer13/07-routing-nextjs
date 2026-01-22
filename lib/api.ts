@@ -27,9 +27,9 @@ const api = axios.create({
 
 
 export const fetchNotes = async (
-  tag: string,
   search: string,
   page: number,
+  tag?: string,
 ) : Promise<FetchNotesResponse> => {
   const response = await api.get<FetchNotesResponse>("", {
     params: {
