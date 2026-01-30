@@ -47,12 +47,6 @@ export const fetchNoteById = async (id: string): Promise<Note> => {
   return response.data;
 };
 
-export const getTags = async (tagsId?: string) => {
-  const res = await axios.get<Note>('/constants', {
-    params: { tagsId },
-  });
-  return res.data;
-};
 export const createNote = async (payload: CreateNotePayload): Promise<Note> => {
   const response = await api.post<Note>("", payload);
   return response.data;

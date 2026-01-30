@@ -1,4 +1,4 @@
-import { getTags } from "@/lib/api";
+import SidebarNotes from "../@sidebar/SidebarNotes";
 import { QueryClient, HydrationBoundary, dehydrate } from  "@tanstack/react-query";
 import NotesClient from "./Notes.client";
 
@@ -11,10 +11,10 @@ export default async function NotePage ({ params }: Props) {
 
    await queryClient.prefetchQuery({
     queryKey: ["notes", slug[0]],
-    queryFn: () => getTags(""),
+    queryFn: () => SidebarNotes(slug[0]),
    });
 
    return <HydrationBoundary state={dehydrate(queryClient)}>
-      <NotesClient />
+      <NotesClient tags={slug[0]}/>
    </HydrationBoundary>
 }

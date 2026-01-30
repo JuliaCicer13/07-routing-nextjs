@@ -54,7 +54,7 @@ return (
   </header>
     {isSuccess && results.length > 0 && ( <NoteList notes={results}/>)}
      <Toaster position="top-right" reverseOrder={false}/>
-     {isModalOpen && (<Modal onClick={closeModal}>
+     {isModalOpen && (<Modal onClick={closeModal} onClose={closeModal}>
       <NoteForm onClose={closeModal}/>
      </Modal>
      )}
