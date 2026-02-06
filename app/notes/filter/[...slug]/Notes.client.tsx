@@ -9,13 +9,17 @@ import Modal from "@/components/Modal/Modal";
 import NoteList from '@/components/NoteList/NoteList';
 import {Toaster} from "react-hot-toast";
 import Pagination from '@/components/Pagination/Pagination';
+import SidebarNotes from "../@sidebar/default";
 
-export default function NotesClient() {
+ type NotesClientProps = {
+      tag: string;
+}
+
+export default function NotesClient({tag}: NotesClientProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [search, setSearchQuery] = useState<string>("");
-  const [page, onPageChange] = useState(1);
-  const [tag, setTag] = useState<string>("");
-  
+  const [page, setPage] = useState(1);
+
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
@@ -23,15 +27,14 @@ export default function NotesClient() {
   const handleSearch = useDebouncedCallback(
     (value:string) => {
     setSearchQuery(value);
-    onPageChange(1);
-    setTag(value);
+    setPage(1);
    },
     500
   );
 
   const { data, isSuccess} = useQuery({
-    queryKey: ['notes', search, tag , page],
-    queryFn: () => fetchNotes(search, page ,tag),
+    queryKey: ['notes', search, page,tag],
+    queryFn: () => fetchNotes(search, page,tag),
     placeholderData: keepPreviousData,
     refetchOnMount: false,
   });
@@ -43,11 +46,12 @@ return (
  <div>
   <header>
     <SearchBox value={search} onChange={handleSearch}/>
+    <SidebarNotes/>
     {isSuccess && totalPages > 1 && (
       <Pagination
         totalPages={totalPages}
         page={page}
-        setPage={onPageChange}
+        onPageChange={setPage}
       />
     )}
     <button onClick={openModal} >Create note +</button>

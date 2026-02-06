@@ -5,16 +5,13 @@ import NotesClient from "./Notes.client";
 type Props = {
   params: Promise<{ slug: string[] }>;
 };
+
 export default async function NotePage ({ params }: Props) {
    const queryClient = new QueryClient();
    const {slug} = await params;
 
-   await queryClient.prefetchQuery({
-    queryKey: ["notes", slug[0]],
-    queryFn: () => SidebarNotes(slug[0]),
-   });
 
    return <HydrationBoundary state={dehydrate(queryClient)}>
-      <NotesClient tags={slug[0]}/>
+      <NotesClient tag={slug[0]}/>
    </HydrationBoundary>
 }

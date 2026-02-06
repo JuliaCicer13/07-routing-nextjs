@@ -15,7 +15,6 @@ interface CreateNotePayload {
     tag: string;
 }
 
-const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const api = axios.create({
   baseURL: BASE_URL,
